@@ -29,3 +29,51 @@ export const products: TProduct[] = [{
     description: "Monitor LED Full HD 24 polegadas",
     imageUrl: "https://picsum.photos/seed/Monitor/400"
 }]
+
+export const createUser = (
+        id: string | number, 
+        name: string, 
+        email: string, 
+        password: string | number): string => {
+    
+        const newUser: TUser = {
+        id: id,
+        name: name,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+    }
+    users.push(newUser);
+    return "Cadastro realizado com sucesso!"
+}
+
+export const getAllUsers = (): TUser[] => {
+    return users
+}
+
+export const createProduct = (
+    id: string | number,
+    name: string,
+    price: number,
+    description: string,
+    imageUrl: string) : string => {
+        const newProduct: TProduct = {
+            id: id,
+            name: name,
+            price: price,
+            description: description,
+            imageUrl: imageUrl
+        }
+        products.push(newProduct);
+        return "Produto criado com sucesso!"
+    }
+
+    export const getAllProducts = (): TProduct[] => {
+        return products
+    }
+
+    export const searchProductsByName = (name:string) => {
+        return products.filter((product) => {
+            return product.name.toLowerCase().includes(name.toLowerCase());
+        })
+    }
