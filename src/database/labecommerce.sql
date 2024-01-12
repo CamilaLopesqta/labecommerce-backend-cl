@@ -59,3 +59,46 @@ UPDATE products
         image_url = 'https://m.media-amazon.com/images/I/51yXlssh8SL._AC_SX425_.jpg'
 WHERE
     id = 'p001';
+
+CREATE TABLE 
+IF NOT EXISTS purchases (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    buyer TEXT NOT NULL,
+    total_price REAL NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (DATETIME()),
+    FOREIGN KEY (buyer) REFERENCES users(id)
+    );
+
+DROP TABLE purchases;
+
+INSERT INTO purchases(id, buyer, total_price)
+VALUES
+    ('ped001', 'u001', 1500),
+    ('ped002', 'u003', 200),
+    ('ped003', 'u005', 599),
+    ('ped004', 'u002', 150),
+    ('ped005', 'u004', 1200);
+
+SELECT * FROM purchases;
+
+INSERT INTO purchases(id, buyer, total_price)
+VALUES ('ped006', 'u001', 1500);
+
+UPDATE purchases
+    SET 
+        total_price = 200
+WHERE 
+    id = 'ped001';
+
+SELECT * FROM purchases;
+
+SELECT
+    purchases.id AS purchasesId,
+    users.id AS userId,
+    users.name,
+    users.email,
+    purchases.total_price AS totalPrice,
+    purchases.created_at
+FROM purchases
+INNER JOIN users
+ON users.id = purchases.buyer;
