@@ -31,10 +31,10 @@ export const products: TProduct[] = [{
 }]
 
 export const createUser = (
-        id: string | number, 
+        id: string, 
         name: string, 
         email: string, 
-        password: string | number): string => {
+        password: string): string => {
     
         const newUser: TUser = {
         id: id,
